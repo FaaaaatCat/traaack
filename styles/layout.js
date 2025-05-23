@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import { lightMode } from "./lightMode";
 
 export default StyleSheet.create({
+  text_header:{},
   header: {
     marginTop: 20,
     height: 60,
@@ -12,27 +13,35 @@ export default StyleSheet.create({
     padding: 16,
   },
   tabMenu: {
-    borderRadius: 16,
-    padding: 10,
+    borderRadius: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    height: 30,
   },
   tabText: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
+    lineHeight: 30,
   },
-  tabText: {},
-  bg_black: { backgroundColor: lightMode.black },
-  bg_white: { backgroundColor: lightMode.white },
-  bg_gray100: { backgroundColor: lightMode.gray100 },
-  bg_gray50: { backgroundColor: lightMode.gray50 },
-  bg_gray10: { backgroundColor: lightMode.gray10 },
-  bg_brand100: { backgroundColor: lightMode.brand100 },
-  bg_brand50: { backgroundColor: lightMode.brand50 },
-  bg_brand10: { backgroundColor: lightMode.brand10 },
-  color_black: { color: lightMode.black },
-  color_white: { color: lightMode.white },
-  color_gray100: { color: lightMode.gray100 },
-  color_gray50: { color: lightMode.gray50 },
-  color_gray10: { color: lightMode.gray10 },
-  color_brand100: { color: lightMode.brand100 },
-  color_brand50: { color: lightMode.brand50 },
-  color_brand10: { color: lightMode.brand10 },
+  trackComponent: {
+    flexDirection: "colume",
+    gap: 5,
+  },
+  mainImg: {
+    position: "relative",
+    backgroundColor: lightMode.gray10,
+    borderRadius: 20,
+    height: 200,
+    alignItems: "center",
+    justifyContent : "center",
+  },
+  mainImg_img: {
+  },
+  mainImg_info_wrap: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    padding: 10,
+    flexDirection: "row",
+    gap: 10,
+  },
 });

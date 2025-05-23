@@ -1,59 +1,40 @@
 // App.js (NativeWind 버전)
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
-import styles from "./styles/layout";
-import theme from "./styles/lightMode"
-import tw from "tailwind-react-native-classnames";
+import layout from "./styles/layout";
+import tool, { tools } from "./styles/tool";
+import Header from "./components/Header";
 import MyTrack from "./components/MyTrack";
 import WholeMusics from "./components/WholeMusics";
+import MusicPlayer from "./components/MusicPlayer";
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+function HomeScreen() {
   const [tab, setTab] = useState("my");
-
 
   return (
     <View>
       {/* 헤더 */}
-      <View style={styles.header}>
-        <Text>
-          Traaack
-        </Text>
-        <View style={tw`flex-row`}>
-          <Ionicons
-            name="person-outline"
-            size={24}
-            color={styles.color_black}
-            style={{ marginRight: 16 }}
-          />
-          <Ionicons
-            name="settings-outline"
-            size={24}
-            color={styles.color_black}
-          />
-        </View>
-      </View>
+      <Header />
       {/* 바디 */}
-      <View style={tw`p-3`}>
+      <View style={tools("p_3", "gap_3")}>
         {/* 탭 메뉴 */}
-        <View style={tw`flex-row`}>
+        <View style={tools("flx_row", "gap_2")}>
           <TouchableOpacity
             onPress={() => setTab("my")}
             style={[
-              styles.tabMenu,
-              tab === "my" ? styles.bg_black : styles.bg_gray10,
-              { marginRight: 10 },
+              layout.tabMenu,
+              tab === "my" ? tool.bg_black : tool.bg_gray10,
             ]}
           >
             <Text
               style={[
-                styles.tabText,
-                tab === "my" ? styles.color_brand10 : styles.color_gray50,
+                layout.tabText,
+                tab === "my" ? tool.color_brand10 : tool.color_gray50,
               ]}
             >
               내 Track
@@ -62,14 +43,14 @@ export default function App() {
           <TouchableOpacity
             onPress={() => setTab("all")}
             style={[
-              styles.tabMenu,
-              tab === "all" ? styles.bg_black : styles.bg_gray10,
+              layout.tabMenu,
+              tab === "all" ? tool.bg_black : tool.bg_gray10,
             ]}
           >
             <Text
               style={[
-                styles.tabText,
-                tab === "all" ? styles.color_brand10 : styles.color_gray50,
+                layout.tabText,
+                tab === "all" ? tool.color_brand10 : tool.color_gray50,
               ]}
             >
               전체 음악
@@ -80,5 +61,16 @@ export default function App() {
         <ScrollView>{tab === "my" ? <MyTrack /> : <WholeMusics />}</ScrollView>
       </View>
     </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="MusicPlayer" component={MusicPlayer} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

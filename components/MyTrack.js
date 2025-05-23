@@ -1,28 +1,39 @@
-// components/MyTrack.js
-import React from "react";
-import { View, Text } from "react-native";
-import styles from "../styles/layout";
-import tw from "tailwind-react-native-classnames";
+import { View, Text, Pressable } from "react-native";
+import layout from "../styles/layout";
+import tool, { tools } from "../styles/tool";
+import { useNavigation } from "@react-navigation/native";
 
 export default function MyTrack() {
+  const navigation = useNavigation();
   return (
     <>
-      <View className="flex-row">
-        <View style={[tw`p-3`, { borderRadius: 20 }, styles.bg_gray10]}>
-          <Text>🎧 오늘</Text>
-          <Text className="text-base">
-            <Text className="text-green-500 font-bold">0</Text> 보{" "}
-            <Text className="text-green-500 font-bold">0</Text> 곡
-          </Text>
+      {/* 트랙 컴포넌트 */}
+      <Pressable
+        style={layout.trackComponent}
+        onPress={() => navigation.navigate("MusicPlayer")}
+      >
+        {/* 트랙 img */}
+        <View style={layout.mainImg}>
+          <Text style={layout.mainImg_img}>🎧</Text>
+          <View style={layout.mainImg_info_wrap}>
+            <View
+              style={tools("bg_gray50", "br_10", "p_1", "flx_row", "gap_1")}
+            >
+              <Text style={tool.color_white}>🎵0</Text>
+            </View>
+            <View
+              style={tools("bg_gray50", "br_10", "p_1", "flx_row", "gap_1")}
+            >
+              <Text style={tool.color_white}>🎵0</Text>
+            </View>
+          </View>
         </View>
-        <View className="bg-white p-5 rounded-lg mb-3">
-          <Text className="text-base">🎵 내 트랙1</Text>
+        {/* 트랙 info */}
+        <View style={tools("flx_sb")}>
+          <Text style={layout.text_header}>내 트랙1</Text>
+          <Text>아이콘</Text>
         </View>
-        <View className="bg-white p-5 rounded-lg mb-3">
-          <Text className="text-green-500 text-base">+ Premium</Text>
-          <Text className="text-base">내 트랙2</Text>
-        </View>
-      </View>
+      </Pressable>
     </>
   );
 }
